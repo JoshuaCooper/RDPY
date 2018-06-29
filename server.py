@@ -8,6 +8,9 @@ from filegeneration import fileGeneration
 @get('/') # or @route('/login')
 def index():
     return '''
+        <html>
+        <head>
+        <title>RDPY Creation Tool</title>
         <form action="/" method="post">
             Username: <input name="username" type="text" />
             <br>
@@ -15,7 +18,7 @@ def index():
             <br>
             Hostname: <input name="hostname" type="hostname" />
             <br>
-            <input value="Login" type="submit" />
+            <input value="Create File" type="submit" />
         </form>
     '''
 
@@ -35,6 +38,8 @@ def output():
             <title>Your file is freshly baked</title>
             <body>
             <a href="http://localhost:8080/files/{{filename}}.rdp">Here is your custom RDP file</a>
+            <br>
+            <a href="http://localhost:8080/">Create a new one</a>
             </body>
             </head>
         </html>
@@ -43,6 +48,5 @@ def output():
 @get('/files/<filename>')
 def returnfile(filename):
     return static_file(filename, root="./dynamic_files", download=filename)
-    
 
 run(host='localhost', port=8080)
